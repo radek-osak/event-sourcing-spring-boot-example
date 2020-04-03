@@ -1,5 +1,6 @@
 package com.ara.es.controllers;
 
+import com.ara.es.dto.AccountDTO;
 import com.ara.es.service.AccountQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,5 +22,10 @@ public class AccountQueryController {
     @GetMapping("/audit/{id}")
     public List<Object> audit(@PathVariable(value = "id") String id) {
         return accountQueryService.auditAccount(id);
+    }
+
+    @GetMapping("/state/{id}")
+    public AccountDTO getCurrentState(@PathVariable(value = "id") String id) {
+        return accountQueryService.getCurrentState(id);
     }
 }
