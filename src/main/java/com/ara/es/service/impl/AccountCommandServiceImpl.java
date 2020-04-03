@@ -22,8 +22,10 @@ public class AccountCommandServiceImpl implements AccountCommandService {
     }
 
     @Override
-    public void createAccount(AccountCreateDTO accountCreateDTO) {
-        commandGateway.send(new CreateAccountCommand(UUID.randomUUID().toString(), accountCreateDTO.getStartingBalance(), accountCreateDTO.getCurrency()));
+    public String createAccount(AccountCreateDTO accountCreateDTO) {
+        String id = UUID.randomUUID().toString();
+        commandGateway.send(new CreateAccountCommand(id, accountCreateDTO.getStartingBalance(), accountCreateDTO.getCurrency()));
+        return id;
     }
 
     @Override

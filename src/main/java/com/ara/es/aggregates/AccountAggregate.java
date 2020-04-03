@@ -72,7 +72,6 @@ public class AccountAggregate {
         if (this.accountBalance >= 0 && (this.accountBalance - moneyDebitedEvent.debitAmount) < 0) {
             AggregateLifecycle.apply(new AccountHeldEvent(this.id, Status.HOLD));
         }
-
         this.accountBalance -= moneyDebitedEvent.debitAmount;
     }
 

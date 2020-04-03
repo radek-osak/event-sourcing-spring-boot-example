@@ -17,8 +17,8 @@ public class AccountCommandController {
     }
 
     @PostMapping("/create")
-    public void createAccount(@RequestBody AccountCreateDTO accountCreateDTO) {
-        accountCommandService.createAccount(accountCreateDTO);
+    public String createAccount(@RequestBody AccountCreateDTO accountCreateDTO) {
+        return accountCommandService.createAccount(accountCreateDTO);
     }
 
     @PutMapping("/credit")
