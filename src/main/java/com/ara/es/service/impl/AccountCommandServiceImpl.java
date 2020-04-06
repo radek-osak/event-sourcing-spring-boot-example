@@ -3,6 +3,7 @@ package com.ara.es.service.impl;
 import com.ara.es.dto.AccountCreateDTO;
 import com.ara.es.dto.MoneyCreditedDTO;
 import com.ara.es.dto.MoneyDebitDTO;
+import com.ara.es.es.commands.ActivateAccountCommand;
 import com.ara.es.es.commands.CreateAccountCommand;
 import com.ara.es.es.commands.CreditMoneyCommand;
 import com.ara.es.es.commands.DebitMoneyCommand;
@@ -36,5 +37,10 @@ public class AccountCommandServiceImpl implements AccountCommandService {
     @Override
     public void debitMoneyFromAccount(MoneyDebitDTO moneyDebitDTO) {
         commandGateway.send(new DebitMoneyCommand(moneyDebitDTO.getId(), moneyDebitDTO.getDebitAmount(), moneyDebitDTO.getCurrency()));
+    }
+
+    @Override
+    public void activateAccount(String id) {
+        commandGateway.send(new ActivateAccountCommand(id));
     }
 }

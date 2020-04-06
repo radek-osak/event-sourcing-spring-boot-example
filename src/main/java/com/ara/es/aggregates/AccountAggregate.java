@@ -1,5 +1,6 @@
 package com.ara.es.aggregates;
 
+import com.ara.es.es.commands.ActivateAccountCommand;
 import com.ara.es.es.commands.CreateAccountCommand;
 import com.ara.es.es.commands.CreditMoneyCommand;
 import com.ara.es.es.commands.DebitMoneyCommand;
@@ -29,7 +30,7 @@ public class AccountAggregate {
     @CommandHandler
     public AccountAggregate(CreateAccountCommand createAccountCommand){
         AggregateLifecycle
-                .apply(new AccountCreatedEvent(createAccountCommand.id, createAccountCommand.accountBalance, createAccountCommand.currency));
+                .apply(new AccountCreatedEvent(createAccountCommand.id, createAccountCommand.accountBalance, createAccountCommand.currency, Status.NEW_USER));
     }
 
     @CommandHandler
@@ -44,14 +45,17 @@ public class AccountAggregate {
                 .apply(new MoneyDebitedEvent(debitMoneyCommand.id, debitMoneyCommand.debitAmmount, debitMoneyCommand.currency));
     }
 
+    @CommandHandler
+    protected void on(ActivateAccountCommand activateAccountCommand) {
+        AggregateLifecycle.apply(new AccountActivatedEvent(activateAccountCommand.id, Status.ACTIVATED));
+    }
+
     @EventSourcingHandler
     protected void on(AccountCreatedEvent accountCreatedEvent) {
         this.id = accountCreatedEvent.id;
         this.currency = accountCreatedEvent.currency;
         this.accountBalance = accountCreatedEvent.accountBalance;
-        this.status = String.valueOf(Status.NEW_USER);
-
-        AggregateLifecycle.apply(new AccountActivatedEvent(this.id, Status.ACTIVATED));
+        this.status = String.valueOf(accountCreatedEvent.status);
     }
 
     @EventSourcingHandler

@@ -9,4 +9,5 @@ public interface AccountCommandService {
     String createAccount(AccountCreateDTO accountCreateDTO);
     void creditMoneyToAccount(MoneyCreditedDTO moneyCreditedDTO);
     void debitMoneyFromAccount(MoneyDebitDTO moneyDebitDTO);
+    void activateAccount(String id);
 }

@@ -35,6 +35,7 @@ public class AccountQueryServiceImpl implements AccountQueryService {
             if (o instanceof AccountCreatedEvent) {
                 accountDTO.setId(((AccountCreatedEvent) o).id);
                 accountDTO.setAccountBalance(((AccountCreatedEvent) o).accountBalance);
+                accountDTO.setStatus(((AccountCreatedEvent) o).status);
             }
             if (o instanceof AccountActivatedEvent) {
                 accountDTO.setStatus(((AccountActivatedEvent) o).status);

@@ -30,4 +30,9 @@ public class AccountCommandController {
     public void debitFromAccount(@RequestBody MoneyDebitDTO moneyDebitDTO) {
         accountCommandService.debitMoneyFromAccount(moneyDebitDTO);
     }
+
+    @GetMapping("/activate/{id}")
+    public void activateAccount(@PathVariable(value = "id") String id) {
+        accountCommandService.activateAccount(id);
+    }
 }

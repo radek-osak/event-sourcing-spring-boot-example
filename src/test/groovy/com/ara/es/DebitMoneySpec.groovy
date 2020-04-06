@@ -23,6 +23,7 @@ class DebitMoneySpec extends Specification {
         accountCreateDTO.setCurrency('DOLLARS')
         accountCreateDTO.setStartingBalance(1000)
         def id = accountCommandService.createAccount(accountCreateDTO)
+        accountCommandService.activateAccount(id)
 
         when:
         def command = new MoneyDebitDTO()
@@ -45,6 +46,7 @@ class DebitMoneySpec extends Specification {
         accountCreateDTO.setCurrency('DOLLARS')
         accountCreateDTO.setStartingBalance(1000)
         def id = accountCommandService.createAccount(accountCreateDTO)
+        accountCommandService.activateAccount(id)
 
         when:
         def command = new MoneyDebitDTO()

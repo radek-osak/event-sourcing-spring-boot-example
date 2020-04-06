@@ -24,6 +24,7 @@ class CreditMoneySpec extends Specification {
         accountCreateDTO.setCurrency('DOLLARS')
         accountCreateDTO.setStartingBalance(1000)
         def id = accountCommandService.createAccount(accountCreateDTO)
+        accountCommandService.activateAccount(id)
 
         when:
         def creditedDTO = new MoneyCreditedDTO()

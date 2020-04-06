@@ -4,7 +4,6 @@ import com.ara.es.dto.AccountCreateDTO
 import com.ara.es.dto.AccountDTO
 import com.ara.es.service.AccountCommandService
 import com.ara.es.service.AccountQueryService
-import com.ara.es.utils.Status
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
@@ -18,7 +17,7 @@ class CreateAccountSpec extends Specification {
     @Autowired
     AccountQueryService accountQueryService
 
-    def 'should create new account and check if it is in active status'() {
+    def 'should create new account and check if it is exist'() {
         given:
         def accountCreateDTO = new AccountCreateDTO()
         accountCreateDTO.setCurrency('DOLLARS')
@@ -31,7 +30,7 @@ class CreateAccountSpec extends Specification {
         AccountDTO accountDTO = accountQueryService.getCurrentState(id)
 
         expect:
-        accountDTO.getStatus() == Status.ACTIVATED
+        accountDTO != null
     }
 
     def 'should create new account and check if accountBalance is proper'() {
